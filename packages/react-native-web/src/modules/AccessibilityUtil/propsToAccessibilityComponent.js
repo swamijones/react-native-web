@@ -12,9 +12,12 @@ import propsToAriaRole from './propsToAriaRole';
 const roleComponents = {
   article: 'article',
   banner: 'header',
+  button: 'button',
   complementary: 'aside',
   contentinfo: 'footer',
+  fieldset: 'fieldset',
   form: 'form',
+  legend: 'legend',
   link: 'a',
   list: 'ul',
   listitem: 'li',
