@@ -88,7 +88,7 @@ class Text extends Component<*> {
       onPress && styles.pressable
     ];
 
-    const component = isInAParentText ? 'span' : 'div';
+    const component = isInAParentText ? 'span' : 'p';
 
     return createElement(component, otherProps);
   }

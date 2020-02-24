@@ -14,10 +14,12 @@ import TouchableOpacity from '../TouchableOpacity';
 import Text from '../Text';
 import { bool, func, string } from 'prop-types';
 import React, { Component } from 'react';
+import createElement from '../createElement'
 
 class Button extends Component<*> {
   static propTypes = {
     accessibilityLabel: string,
+    accessibilityRole: string,
     color: ColorPropType,
     disabled: bool,
     onPress: func.isRequired,
@@ -26,24 +28,32 @@ class Button extends Component<*> {
   };
 
   render() {
-    const { accessibilityLabel, color, disabled, onPress, testID, title } = this.props;
-
-    return (
-      <TouchableOpacity
-        accessibilityLabel={accessibilityLabel}
-        accessibilityRole="button"
-        disabled={disabled}
-        onPress={onPress}
-        style={[
-          styles.button,
-          color && { backgroundColor: color },
-          disabled && styles.buttonDisabled
-        ]}
-        testID={testID}
-      >
-        <Text style={[styles.text, disabled && styles.textDisabled]}>{title}</Text>
-      </TouchableOpacity>
-    );
+    const { accessibilityLabel, accessibilityRole, color, disabled, onPress, testID, title } = this.props;
+    let submitStyles = [styles.button, styles.text]
+    if(disabled){
+      submitStyles = submitStyles.concat([styles.buttonDisabled, styles.textDisabled])
+    }
+    return (accessibilityRole === 'submit')
+        ? createElement('input', {
+          disabled: disabled,
+          style: submitStyles,
+          type: 'submit',
+          value: title
+        })
+        : <TouchableOpacity
+            accessibilityLabel={accessibilityLabel}
+            accessibilityRole="button" 
+            disabled={disabled}
+            onPress={onPress}
+            style={[
+              styles.button,
+              color && { backgroundColor: color },
+              disabled && styles.buttonDisabled
+            ]}
+            testID={testID}
+          >
+            <Text style={[styles.text, disabled && styles.textDisabled]}>{title}</Text>
+          </TouchableOpacity>
   }
 }
 

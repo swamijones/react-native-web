@@ -21,6 +21,7 @@ const TextPropTypes = {
     'header',
     'heading',
     'label',
+    'legend',
     'link',
     'listitem',
     'none',
